@@ -3,6 +3,32 @@
   <head>
     <title>DEMO</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
-    <script type="module" src="./script.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="script.js"></script>
   </head>
+  <body>
+    <h1>Live WebGL</h1>
+    <div class="webgl-container">
+      <div class="webgl"></div>
+    </div>
+    <h1>Encode video</h1>
+    <form class="encode-video-form">
+      <div>
+        <label>Width: <input type="number" name="width" /></label>
+        <label>Height: <input type="number" name="height" /></label>
+      </div>
+      <div>
+        <label>FPS: <input type="number" name="fps" value="60" /></label>
+      </div>
+      <div>
+        <label>Seconds: <input type="number" name="seconds" value="5" /></label>
+      </div>
+      <div>
+        <label
+          >Bitrate: <input type="number" name="bitrate" value="10000"
+        /></label>
+      </div>
+      <div><button>Generate</button></div>
+    </form>
+  </body>
 </html>

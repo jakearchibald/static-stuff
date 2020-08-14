@@ -1,0 +1,21 @@
+.webgl {
+  width: 320px;
+  height: 180px;
+}
+
+.webgl canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+}
+
+.buttons {
+  padding: 10px 0;
+}
+
+.webgl-container:fullscreen .buttons {
+  position: fixed;
+  top: 0;
+  left: 10px;
+}
