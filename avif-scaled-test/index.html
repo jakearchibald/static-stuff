@@ -7,7 +7,7 @@
       .images {
         display: grid;
         grid-template-columns: min-content min-content min-content;
-        grid-template-rows: min-content min-content;
+        grid-template-rows: min-content min-content min-content;
         grid-auto-flow: row;
       }
       img,
@@ -42,17 +42,54 @@
         <h1>avif on canvas</h1>
         <canvas data-src="wing.avif"></canvas>
       </div>
+      <div>
+        <h1>jpg on big canvas</h1>
+        <canvas data-width="400" data-src="wing.jpg"></canvas>
+      </div>
+      <div>
+        <h1>webp on big canvas</h1>
+        <canvas data-width="400" data-src="wing.webp"></canvas>
+      </div>
+      <div>
+        <h1>avif on big canvas</h1>
+        <canvas data-width="400" data-src="wing.avif"></canvas>
+      </div>
+      <div>
+        <h1>jpg &lt;img&gt; on canvas</h1>
+        <canvas data-take-img="1" data-src="wing.jpg"></canvas>
+      </div>
+      <div>
+        <h1>webp &lt;img&gt; on canvas</h1>
+        <canvas data-take-img="1" data-src="wing.webp"></canvas>
+      </div>
+      <div>
+        <h1>avif &lt;img&gt; on canvas</h1>
+        <canvas data-take-img="1" data-src="wing.avif"></canvas>
+      </div>
     </div>
     <script type="module">
       document.querySelectorAll('[data-src]').forEach(async (c) => {
         /** @type {HTMLCanvasElement} */
         const canvas = c;
-        const blob = await fetch(canvas.dataset.src).then((r) => r.blob());
-        const bmp = await createImageBitmap(blob);
-        canvas.width = bmp.width;
-        canvas.height = bmp.height;
+        /** @type {ImageBitmap | HTMLImageElement} */
+        let drawable;
+        const src = canvas.dataset.src;
+
+        if (canvas.dataset.takeImg) {
+          /** @type {HTMLImageElement} */
+          const img = document.querySelector(`img[src="${src}"]`);
+          await img.decode();
+          drawable = img;
+        } else {
+          const blob = await fetch(src).then((r) => r.blob());
+          drawable = await createImageBitmap(blob);
+        }
+
+        const width = canvas.dataset.width || drawable.width;
+        canvas.width = width;
+        canvas.height = (width / drawable.width) * drawable.height;
         const ctx = canvas.getContext('2d');
-        ctx.drawImage(bmp, 0, 0);
+        ctx.drawImage(drawable, 0, 0, canvas.width, canvas.height);
       });
     </script>
   </body>
