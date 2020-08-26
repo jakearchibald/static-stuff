@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DEMO</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+    <style>
+      .images {
+        display: grid;
+        grid-template-columns: min-content min-content min-content;
+        grid-template-rows: min-content min-content;
+        grid-auto-flow: row;
+      }
+      img,
+      canvas {
+        width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="images">
+      <div>
+        <h1>jpg</h1>
+        <img src="wing.jpg" />
+      </div>
+      <div>
+        <h1>webp</h1>
+        <img src="wing.webp" />
+      </div>
+      <div>
+        <h1>avif</h1>
+        <img src="wing.avif" />
+      </div>
+      <div>
+        <h1>jpg on canvas</h1>
+        <canvas data-src="wing.jpg"></canvas>
+      </div>
+      <div>
+        <h1>webp on canvas</h1>
+        <canvas data-src="wing.webp"></canvas>
+      </div>
+      <div>
+        <h1>avif on canvas</h1>
+        <canvas data-src="wing.avif"></canvas>
+      </div>
+    </div>
+    <script type="module">
+      document.querySelectorAll('[data-src]').forEach(async (c) => {
+        /** @type {HTMLCanvasElement} */
+        const canvas = c;
+        const blob = await fetch(canvas.dataset.src).then((r) => r.blob());
+        const bmp = await createImageBitmap(blob);
+        canvas.width = bmp.width;
+        canvas.height = bmp.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bmp, 0, 0);
+      });
+    </script>
+  </body>
+</html>
