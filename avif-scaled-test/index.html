@@ -6,7 +6,7 @@
     <style>
       .images {
         display: grid;
-        grid-template-columns: min-content min-content min-content;
+        grid-template-columns: min-content min-content min-content min-content;
         grid-template-rows: min-content min-content min-content;
         grid-auto-flow: row;
       }
@@ -23,6 +23,10 @@
         <img src="wing.jpg" />
       </div>
       <div>
+        <h1>jpg - subsample 3</h1>
+        <img src="wing-2.jpg" />
+      </div>
+      <div>
         <h1>webp</h1>
         <img src="wing.webp" />
       </div>
@@ -33,6 +37,10 @@
       <div>
         <h1>jpg on canvas</h1>
         <canvas data-src="wing.jpg"></canvas>
+      </div>
+      <div>
+        <h1>jpg sub3 on canvas</h1>
+        <canvas data-src="wing-2.jpg"></canvas>
       </div>
       <div>
         <h1>webp on canvas</h1>
@@ -47,6 +55,10 @@
         <canvas data-width="400" data-src="wing.jpg"></canvas>
       </div>
       <div>
+        <h1>jpg sub3 on big canvas</h1>
+        <canvas data-width="400" data-src="wing-2.jpg"></canvas>
+      </div>
+      <div>
         <h1>webp on big canvas</h1>
         <canvas data-width="400" data-src="wing.webp"></canvas>
       </div>
@@ -57,6 +69,10 @@
       <div>
         <h1>jpg &lt;img&gt; on canvas</h1>
         <canvas data-take-img="1" data-src="wing.jpg"></canvas>
+      </div>
+      <div>
+        <h1>jpg sub3 &lt;img&gt; on canvas</h1>
+        <canvas data-take-img="1" data-src="wing-2.jpg"></canvas>
       </div>
       <div>
         <h1>webp &lt;img&gt; on canvas</h1>
